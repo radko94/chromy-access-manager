@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  chromy-access-manager-dev:
+    container_name: api-dev
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=chatbot_db_manager
+      - POSTGRES_PASSWORD=wXcFy2u7*exGH3fm*Zsb42
+      - POSTGRES_DATABASE=chatbot_db
+    volumes:
+      - ./:/app:delegated
+    depends_on:
+      - postgres
+  chromy-access-manager-prod:
+    container_name: api-prod
+    build:
+      context: git@github.com:radko94/chat-bot-ui.git
+      dockerfile: Dockerfile.prod
+    ports:
+      - 3000:3000
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=chatbot_db_manager
+      - POSTGRES_PASSWORD=wXcFy2u7*exGH3fm*Zsb42
+      - POSTGRES_DATABASE=chatbot_db
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=chatbot_db_manager
+      - POSTGRES_PASSWORD=wXcFy2u7*exGH3fm*Zsb42
+      - POSTGRES_DB=chatbot_db

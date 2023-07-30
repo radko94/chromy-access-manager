@@ -1,0 +1,23 @@
+FROM node:16 AS development
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+COPY tsconfig*.json ./
+
+RUN npm i
+
+# USER root
+# RUN chown -R node:node /app
+# RUN chown 777 /app
+# RUN chown -R node:node /node_modules
+# RUN chown 777 node_modules
+# USER node
+RUN npm i -g @angular/cli
+
+# Copy the application code
+COPY . .
+
+# Start the development server
+CMD ["npm", "run", "start:dev"]
