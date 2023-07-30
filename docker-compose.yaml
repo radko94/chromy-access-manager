@@ -20,7 +20,7 @@ services:
   chromy-access-manager-prod:
     container_name: api-prod
     build:
-      context: git@github.com:radko94/chat-bot-ui.git
+      context: git@github.com:radko94/chromy-access-manager.git
       dockerfile: Dockerfile.prod
     ports:
       - 3000:3000
