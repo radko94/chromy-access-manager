@@ -8,6 +8,7 @@ services:
     ports:
       - 3000:3000
     environment:
+      - PORT=3000
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
       - POSTGRES_USER=chatbot_db_manager
@@ -20,7 +21,7 @@ services:
   chromy-access-manager-prod:
     container_name: api-prod
     build:
-      context: git@github.com:radko94/chromy-access-manager.git
+      context: ./
       dockerfile: Dockerfile.prod
     ports:
       - 3000:3000
